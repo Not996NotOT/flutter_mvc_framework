@@ -6,6 +6,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 void main() {
   Initial();
   runApp(GetMaterialApp(
+    debugShowCheckedModeBanner:false,
     routingCallback: routeInterceptor,
     initialRoute: initialRoute,
     getPages: routes,

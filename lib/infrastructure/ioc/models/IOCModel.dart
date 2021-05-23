@@ -1,3 +1,5 @@
 class IOCModel {
-  
+   goto(){
+
+   }
 }

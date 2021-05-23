@@ -6,7 +6,15 @@ import 'package:get/get.dart';
 class TodoView extends GetView<TodoController> {
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(title: Text("代办事项")),
+      appBar: AppBar(
+        title: Text("代办事项"),
+        actions: [
+          IconButton(
+            onPressed: controller.gotoAddTodoView,
+            icon: Icon(Icons.add),
+          )
+        ],
+      ),
       body: Center(
         child: Obx(() => ListView.builder(
             itemCount: controller.list.length,

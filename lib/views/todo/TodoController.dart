@@ -1,10 +1,12 @@
+import 'package:flutter_mvc_framework/controllers/BaseController.dart';
 import 'package:flutter_mvc_framework/infrastructure/ioc/IOCContainer.dart';
 import 'package:flutter_mvc_framework/models/viewmodels/TodoViewModel.dart';
+import 'package:flutter_mvc_framework/routers/RouterEnum.dart';
 import 'package:flutter_mvc_framework/services/TodoService.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
 
-class TodoController extends GetxController {
+class TodoController extends BaseController {
   var count = 0.obs;
   var _subject = new ReplaySubject();
   var list = new RxList<TodoViewModel>();
@@ -12,7 +14,7 @@ class TodoController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-     _todoService = IOCContainer.getInstance<TodoService>();
+    _todoService = IOCContainer.getInstance<TodoService>();
     _subject.throttleTime(Duration(seconds: 1)).listen((event) {
       list.add(new TodoViewModel(id: list.length, todo: "todo${list.length}"));
     });
@@ -25,6 +27,10 @@ class TodoController extends GetxController {
   void dispose() {
     super.dispose();
     _subject.close();
+  }
+
+  gotoAddTodoView() {
+    this.gotoPath(RouterEnum.TodoForm);
   }
 
   void addTodo() => _subject.add(0);
